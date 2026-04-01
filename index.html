@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creando Nuevo Usuario</title>
+    <style>
+        /* Un poco de estilo básico para que no se vea tan crudo en la expo */
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .formulario { max-width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .campo { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .password-container {   position: relative; /* Nos permite ubicar el ojito adentro */
+                                display: flex;
+                                align-items: center;}
+        .password-container input { width: 100%;
+                                    padding-right: 35px; /* Deja espacio a la derecha para que el texto no pise al ícono */}
+        .toggle-password {  position: absolute;
+                            right: 10px;
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            font-size: 18px;
+                            padding: 0;}
+    </style>
+</head>
+<body>
+
+    <div class="formulario">
+        <h2>CREANDO NUEVO USUARIO:</h2>
+        
+        <form action="procesar.php" method="POST">
+            
+            <div class="campo">
+                <label for="nombre">NOMBRE:</label>
+                <input type="text" id="nombre" name="nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios" required>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-MAIL:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="campo">
+                <label for="direccion">DIRECCIÓN:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+
+            <div class="campo">
+                <label for="edad">EDAD:</label>
+                <input type="number" id="edad" name="edad" min="18" max="120" required>
+            </div>
+
+            <div class="campo">
+                <label for="usuario">NOMBRE USUARIO:</label>
+                <input type="text" id="usuario" name="usuario" pattern="[a-zA-Z0-9_]+" title="Solo letras, números y guiones bajos" minlength="4" maxlength="15" required>
+            </div>
+
+            <div class="campo">
+                <label for="contrasena">CONTRASEÑA:</label>
+                <div class="password-container">
+                    <input type="password" id="contrasena" name="contrasena" minlength="8" required>
+                    <button type="button" class="toggle-password" onclick="mostrarOcultar('contrasena')">👁️</button>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="repetir_contrasena">REPETIR CONTRASEÑA:</label>
+                <div class="password-container">
+                    <input type="password" id="repetir_contrasena" name="repetir_contrasena" minlength="8" required>
+                    <button type="button" class="toggle-password" onclick="mostrarOcultar('repetir_contrasena')">👁️</button>
+                </div>
+            </div>
+
+            <button type="submit">Registrar Usuario</button>
+        </form>
+    </div>
+<script>
+    // Esta función recibe el ID del input que queremos modificar
+    function mostrarOcultar(idDelInput) {
+        const input = document.getElementById(idDelInput);
+        
+        // Si está como contraseña, lo pasamos a texto. Si está como texto, vuelve a contraseña.
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+</script>
+</body>
+</html>
